@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Debug;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 
 import io.flutter.plugin.common.MethodCall;
@@ -78,6 +79,9 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
                 UnityUtils.resume();
                 result.success(true);
                 break;
+            case "dispose":
+
+                break;
             default:
                 result.notImplemented();
         }
@@ -93,7 +97,11 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
     public void dispose() {
         if (UnityUtils.isUnityReady()) {
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            //activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+            View decorView = activity.getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+            decorView.setSystemUiVisibility(uiOptions);
+            activity.getWindow().getDecorView().setSystemUiVisibility();
+
             UnityUtils.getPlayer().pause();
         }
     }
