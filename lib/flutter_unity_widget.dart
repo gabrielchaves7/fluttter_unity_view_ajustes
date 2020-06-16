@@ -52,6 +52,7 @@ class UnityWidgetController {
   }
 
   Future<void> _dispose() async {
+    SystemChrome.setEnabledSystemUIOverlays ([SystemUiOverlay.top, SystemUiOverlay.bottom]);
     await channel.invokeMethod('dispose');
   }
 
