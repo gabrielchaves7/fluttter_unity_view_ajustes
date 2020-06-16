@@ -97,7 +97,8 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
     public void dispose() {
         if (UnityUtils.isUnityReady()) {
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            activity.getActionBar().show();
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+            //activity.getActionBar().show();
             UnityUtils.getPlayer().pause();
         }
     }
