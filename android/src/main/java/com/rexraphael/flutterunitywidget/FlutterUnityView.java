@@ -80,7 +80,11 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
                 result.success(true);
                 break;
             case "dispose":
-
+                View decorView = activity.getWindow().getDecorView();
+                int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+                decorView.setSystemUiVisibility(uiOptions);
+                ActionBar actionBar = activity.getActionBar();
+                actionBar.show();
                 break;
             default:
                 result.notImplemented();
@@ -97,13 +101,7 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
     public void dispose() {
         if (UnityUtils.isUnityReady()) {
             //activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            View decorView = activity.getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
-            decorView.setSystemUiVisibility(uiOptions);
-            ActionBar actionBar = activity.getActionBar();
-            actionBar.show();
-
-
+            //activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
             //activity.getActionBar().show();
             UnityUtils.getPlayer().pause();
         }
