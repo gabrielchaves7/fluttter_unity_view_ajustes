@@ -80,11 +80,6 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
                 result.success(true);
                 break;
             case "dispose":
-                View decorView = activity.getWindow().getDecorView();
-                int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
-                decorView.setSystemUiVisibility(uiOptions);
-                ActionBar actionBar = activity.getActionBar();
-                actionBar.show();
                 break;
             default:
                 result.notImplemented();
